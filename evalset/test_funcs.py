@@ -4200,8 +4200,8 @@ class Sushi(DataFunction):
     def __init__(self, use_discrete_features: bool=False, num_features: int=4):
         # The data files:
         dirname, _ = os.path.split(os.path.abspath(__file__))
-        df_features = pd.read_csv(os.path.realpath(os.path.join(dirname,"data-files", "sushi3.idata")), sep="\t", header=None)
-        df_scores = pd.read_csv(os.path.realpath(os.path.join(dirname,"data-files", "sushi3b.5000.10.score")), sep=" ", header=None)
+        df_features = pd.read_csv(os.path.realpath(os.path.join(dirname,"data_files", "sushi3.idata")), sep="\t", header=None)
+        df_scores = pd.read_csv(os.path.realpath(os.path.join(dirname,"data_files", "sushi3b.5000.10.score")), sep=" ", header=None)
         # Select the features we want (in the order of importance defined by RBF ARD kernel)
         features = df_features.values[:, [6,5,7,8][:num_features] ]
         if use_discrete_features:
@@ -4252,7 +4252,7 @@ class Concrete(DataFunction):
         importance = [2, 0, 3, 7, 1, 4, 5, 6]
         
         dirname, _ = os.path.split(os.path.abspath(__file__))
-        data = pd.read_csv(os.path.realpath(os.path.join(dirname,"data-files", data_file)), sep=",", header=None)                
+        data = pd.read_csv(os.path.realpath(os.path.join(dirname,"data_files", data_file)), sep=",", header=None)                
 
         X = data.values[:,0:-1]
         Y = -data.values[:,-1].reshape((-1,1))
@@ -4269,7 +4269,7 @@ class Candy(DataFunction):
     def __init__(self):
         data_file = "candy-data.csv"
         dirname, _ = os.path.split(os.path.abspath(__file__))
-        X = pd.read_csv(os.path.realpath(os.path.join(dirname,"data-files", data_file)), sep=",", header=None)
+        X = pd.read_csv(os.path.realpath(os.path.join(dirname,"data_files", data_file)), sep=",", header=None)
         
         Y = -X.values[:,-1].reshape((-1,1))        
         X = X.values[:,-3:-1]
@@ -4289,7 +4289,7 @@ class Wine(DataFunction):
         importance = [ 5, 3, 7, 6, 10, 4, 1, 8, 2, 0, 9] 
 
         dirname, _ = os.path.split(os.path.abspath(__file__))
-        data = pd.read_csv(os.path.realpath(os.path.join(dirname,"data-files", data_file)), sep=",", header=None)
+        data = pd.read_csv(os.path.realpath(os.path.join(dirname,"data_files", data_file)), sep=",", header=None)
         X = data.values[:,0:-1]
         Y = -data.values[:,-1].reshape((-1,1))+1.0
         X = X[:, importance[:num_features]]

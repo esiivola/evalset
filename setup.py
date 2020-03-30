@@ -10,6 +10,8 @@ setup(
   author_email='support@sigopt.com',
   url='https://sigopt.com/',
   packages=['evalset'],
+  package_dir={'evalset': 'evalset'},
+  package_data={'evalset': ['data_files/*.csv', 'data_files/*.score', 'data_files/*.idata']},
   install_requires=install_requires,
   classifiers=[
     "Development Status :: 5 - Production/Stable",
