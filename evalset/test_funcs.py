@@ -53,6 +53,12 @@ from scipy.special import jv as besselj
 
 from timeit import default_timer as now
 
+from scipy.interpolate import LinearNDInterpolator
+import os
+import pandas as pd
+from scipy.spatial.distance import cdist
+from typing import List
+
 seterr(all='ignore')
 
 def lzip(*args):
@@ -79,8 +85,8 @@ def execute_random_search(num_fevals, num_trials, function):
     # This function could also take in any other parameters required for the next points determination
     # For instance, most sequential optimizers use the previous observations to get better results
     def random_search_next_point(bounds):
-        np_bounds = asarray(list(bounds))
-        return np_bounds[:, 0] + (np_bounds[:, 1] - np_bounds[:, 0]) * numpy.random.random(len(np_bounds))
+        numpy_bounds = asarray(list(bounds))
+        return numpy_bounds[:, 0] + (numpy_bounds[:, 1] - numpy_bounds[:, 0]) * numpy.random.random(len(numpy_bounds))
 
     f_best_hist = numpy.empty((num_trials, num_fevals))
     for this_trial in range(num_trials):
@@ -4137,7 +4143,7 @@ class DataFunction(TestFunction):
     :param X: Input locations
     :param Y: Input observations
     """
-    def __init__(self, X: np.ndarray, Y: np.ndarray):
+    def __init__(self, X: numpy.ndarray, Y: numpy.ndarray):
         dim = X.shape[1]
         super(DataFunction, self).__init__(dim)
 
@@ -4160,7 +4166,7 @@ class DataFunction(TestFunction):
         self.classifiers = ['complicated', 'oscillatory', 'unimodal', 'noisy']
 
     @staticmethod
-    def give_corners(bounds: np.ndarray) -> np.ndarray:
+    def give_corners(bounds: numpy.ndarray) -> numpy.ndarray:
         """
         Given the bounds, returns the corners of the hyperrectangle the data just barely fits
         
@@ -4175,7 +4181,7 @@ class DataFunction(TestFunction):
         else:
             return numpy.array(bounds[-1]).reshape((-1,1))
 
-    def do_evaluate(self, x: np.ndarray) -> np.ndarray:
+    def do_evaluate(self, x: numpy.ndarray) -> numpy.ndarray:
         """
         Evaluates the data function at the given location by interpolating
         
