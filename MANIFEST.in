@@ -1,2 +1,1 @@
-include evalset/data-files/*
-include evalset/*.py
+recursive-include evalset/*
