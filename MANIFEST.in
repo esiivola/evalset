@@ -1,2 +1,2 @@
-include evalset/data-files/*.py
-include evalset/*
+include evalset/data-files/*
+include evalset/*.py
